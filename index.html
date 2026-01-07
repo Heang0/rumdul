@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUMDUL COFFEE - Coffee</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom CSS - Modern Gen Z Style */
+        :root {
+            --gold: #FFD700;
+            --light-gold: #FFF9C4;
+            --dark-gold: #FFC107;
+            --cream: #FFFBF0;
+            --coffee: #4A2C2A;
+            --soft-brown: #D7CCC8;
+            --genz-pink: #FF6B8B;
+            --genz-teal: #00D4AA;
+            --genz-purple: #9D4EDD;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--cream);
+            color: #333;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        .heading-font {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        
+        .accent-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .gold-accent {
+            color: var(--gold);
+        }
+        
+        .gold-bg {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+        }
+        
+        .modern-shadow {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .genz-shadow {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Modern Card Design */
+        .genz-card {
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .genz-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            border-color: var(--gold);
+        }
+        
+        /* Square Image Container */
+        .square-img-container {
+            width: 100%;
+            padding-top: 100%; /* Creates a square aspect ratio */
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+        }
+        
+        .product-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .genz-card:hover .product-img {
+            transform: scale(1.05);
+        }
+        
+        /* Horizontal scrollable tabs */
+        .tabs-container {
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding: 10px 0;
+            gap: 10px;
+        }
+        
+        .tabs-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .genz-tab {
+            white-space: nowrap;
+            flex-shrink: 0;
+            padding: 12px 24px;
+            border-radius: 50px;
+            background: white;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s ease;
+            border: 2px solid #f0f0f0;
+            font-size: 15px;
+        }
+        
+        .genz-tab:hover {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            transform: translateY(-2px);
+            border-color: var(--gold);
+        }
+        
+        .genz-tab.active-tab {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+            color: white;
+            border-color: var(--gold);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        /* Modal Styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .genz-modal {
+            background: white;
+            border-radius: 24px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.4s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px); 
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0); 
+            }
+        }
+        
+        /* Modern Button */
+        .genz-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+            text-decoration: none;
+        }
+        
+        .genz-button-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+            color: white;
+        }
+        
+        .genz-button-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .genz-button-secondary {
+            background: white;
+            color: var(--coffee);
+            border: 2px solid var(--gold);
+        }
+        
+        .genz-button-secondary:hover {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            transform: translateY(-3px);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 40;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+        
+        .mobile-menu-overlay.active {
+            display: block;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 350px;
+            height: 100%;
+            background: white;
+            z-index: 50;
+            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        /* Hero Section */
+
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Remove background-attachment: fixed on mobile */
+@media (max-width: 768px) {
+    .hero-section {
+        background-attachment: scroll !important;
+        background-size: cover;
+        background-position: center center;
+    }
+}
+
+/* For very small screens, use a smaller image */
+@media (max-width: 640px) {
+    .hero-section {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                          url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+    }
+}
+        
+        /* Popular Badge - Only for truly popular items */
+        .popular-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, var(--genz-pink) 0%, #FF4081 100%);
+            color: white;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(255, 107, 139, 0.3);
+        }
+        
+        /* Foodpanda Button */
+        .foodpanda-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #D70F64 0%, #9C0042 100%);
+            color: white;
+            border-radius: 50px;
+            padding: 14px 28px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .foodpanda-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(215, 15, 100, 0.3);
+        }
+        
+        /* Map Container */
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Section Spacing */
+        .section {
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+        
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Hide scrollbar but allow scrolling */
+        .scroll-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Modern Our Story Section Styles */
+        .story-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--genz-pink) 50%, var(--genz-teal) 100%);
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--genz-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .modern-divider {
+            height: 3px;
+            width: 80px;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--genz-pink) 100%);
+            margin: 20px auto;
+            border-radius: 3px;
+        }
+        
+/* Responsive Grid */
+        @media (max-width: 639px) {
+            #menu-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .genz-card {
+                border-radius: 16px;
+            }
+            
+            .genz-card .p-5 {
+                padding: 12px !important;
+            }
+            
+            .genz-card h3 {
+                font-size: 14px !important;
+                line-height: 1.3 !important;
+                margin-bottom: 6px !important;
+                height: 36px;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            
+            .genz-card .gold-accent {
+                font-size: 16px !important;
+                margin-bottom: 8px !important;
+                height: 24px;
+                line-height: 24px;
+            }
+            
+            .genz-card .text-sm {
+                font-size: 11px !important;
+                line-height: 1.4 !important;
+                margin-bottom: 10px !important;
+                height: 32px;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            
+            .genz-card .genz-button {
+                padding: 10px 16px !important;
+                font-size: 13px !important;
+                gap: 6px !important;
+            }
+            
+            .genz-card .genz-button i {
+                font-size: 14px !important;
+            }
+            
+            .popular-badge {
+                font-size: 10px !important;
+                padding: 4px 10px !important;
+                top: 10px !important;
+                right: 10px !important;
+            }
+        }
+        
+        @media (min-width: 640px) and (max-width: 767px) {
+            #menu-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+        
+        /* Ensure icon alignment in buttons */
+        .genz-button i, 
+        .foodpanda-btn i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            line-height: 1;
+            height: 20px;
+        }
+/* Clickable image container */
+.clickable-image {
+    cursor: pointer;
+    position: relative;
+}
+
+/* Add this CSS for the absolute overlay */
+.clickable-image > .absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.clickable-image:hover > .absolute {
+    pointer-events: auto;
+}
+
+/* Optional: Add click feedback */
+.clickable-image:active {
+    transform: scale(0.98);
+}
+/* === ADD THESE NEW STYLES AT THE END OF YOUR CSS === */
+
+/* Fix for equal card heights and button alignment */
+#menu-container .genz-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#menu-container .genz-card > div:last-child {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#menu-container .genz-card .order-btn {
+    margin-top: auto;
+    width: 100%;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+#menu-container .genz-card p.text-sm {
+    min-height: 40px;
+    margin-bottom: 16px !important;
+}
+
+#menu-container .genz-card h3 {
+    min-height: 56px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Fix for mobile */
+@media (max-width: 639px) {
+    #menu-container .genz-card h3 {
+        min-height: 36px;
+        font-size: 14px !important;
+        -webkit-line-clamp: 2;
+    }
+    
+    #menu-container .genz-card p.text-sm {
+        min-height: 32px;
+        font-size: 11px !important;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    #menu-container .genz-card .order-btn {
+        min-height: 40px;
+        padding: 10px 16px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* Ensure grid cells have equal height */
+#menu-container {
+    align-items: stretch;
+}
+    </style>
+</head>
+<body class="relative">
+    <!-- Foodpanda Order Modal -->
+    <div id="foodpanda-modal" class="modal-overlay">
+        <div class="genz-modal p-6 md:p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="heading-font text-2xl font-bold text-gray-900">Order on Foodpanda</h3>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-800 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <div class="image-placeholder h-48 rounded-2xl mb-6 flex items-center justify-center" style="background: linear-gradient(135deg, #D70F64 0%, #9C0042 100%);">
+                    <i class="fas fa-shopping-bag text-white text-6xl"></i>
+                </div>
+                
+                <div class="text-center mb-6">
+                    <h4 class="heading-font text-xl font-bold mb-2">Get RUMDUL COFFEE delivered!</h4>
+                    <p class="text-gray-600">Order your favorite drinks directly to your door via Foodpanda.</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-2xl p-5 mb-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-motorcycle text-pink-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Fast Delivery</p>
+                            <p class="text-sm text-gray-600">Get your order in 30-45 minutes</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-percent text-yellow-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Exclusive Offers</p>
+                            <p class="text-sm text-gray-600">Special discounts for first-time orders</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col gap-4">
+                    <a href="https://foodpanda.go.link/eHJXH" 
+                   target="_blank" 
+                   class="foodpanda-btn text-center justify-center py-4">
+                    <i class="fas fa-external-link-alt"></i>
+                    Order Now on Foodpanda
+                </a>
+                
+                <button id="close-modal-btn" class="genz-button genz-button-secondary py-4">
+                    Maybe Later
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="p-6">
+            <!-- Mobile Menu Header -->
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center">
+                    <!-- Logo Placeholder - Replace with your logo -->
+                    <div class="w-10 h-10 rounded-full overflow-hidden mr-3">
+                        <img src="img/logo.jpg" alt="Rumdul Coffee Logo" class="w-full h-full object-cover">
+                    </div>
+                    <h1 class="heading-font text-xl font-bold text-gray-900">RUMDUL<span class="gold-accent"> COFFEE</span></h1>
+                </div>
+                <button id="mobile-close-button" class="text-gray-800 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation Links -->
+            <div class="space-y-2 mb-8">
+                <a href="#home" class="mobile-nav-link flex items-center py-4 px-4 rounded-2xl text-gray-800 font-medium hover:bg-gray-100 transition-colors" data-page="home">
+                    <i class="fas fa-home gold-accent text-lg w-8"></i>
+                    <span class="ml-3">Home</span>
+                </a>
+                <a href="#menu" class="mobile-nav-link flex items-center py-4 px-4 rounded-2xl text-gray-800 font-medium hover:bg-gray-100 transition-colors" data-page="menu">
+                    <i class="fas fa-utensils gold-accent text-lg w-8"></i>
+                    <span class="ml-3">Menu</span>
+                </a>
+                <a href="#about" class="mobile-nav-link flex items-center py-4 px-4 rounded-2xl text-gray-800 font-medium hover:bg-gray-100 transition-colors" data-page="about">
+                    <i class="fas fa-info-circle gold-accent text-lg w-8"></i>
+                    <span class="ml-3">About US</span>
+                </a>
+                <a href="#contact" class="mobile-nav-link flex items-center py-4 px-4 rounded-2xl text-gray-800 font-medium hover:bg-gray-100 transition-colors" data-page="contact">
+                    <i class="fas fa-phone gold-accent text-lg w-8"></i>
+                    <span class="ml-3">Contact</span>
+                </a>
+            </div>
+            
+            <!-- Foodpanda Button in Mobile Menu -->
+            <button id="mobile-foodpanda-btn" class="foodpanda-btn w-full justify-center py-4 mb-8">
+                <i class="fas fa-motorcycle"></i>
+                Order on Foodpanda
+            </button>
+            
+            <!-- Contact Info in Mobile Menu -->
+            <div class="pt-6 border-t border-gray-200">
+                <h3 class="text-lg font-bold text-gray-900 mb-4">Visit Us</h3>
+                <p class="text-gray-600 mb-3 flex items-center">
+                    <i class="fas fa-map-marker-alt gold-accent mr-3"></i>
+                    <span>GWQ6+R93, St 454, Phnom Penh</span>
+                </p>
+                <p class="text-gray-600 mb-3 flex items-center">
+                    <i class="fas fa-phone gold-accent mr-3"></i>
+                    <span>097 766 8989</span>
+                </p>
+                <p class="text-gray-600 flex items-center">
+                    <i class="fas fa-clock gold-accent mr-3"></i>
+                    <span>7:00 AM - 10:00 PM Daily</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <!-- Logo - Replace with your image -->
+                    <div class="w-10 h-10 rounded-full overflow-hidden mr-3">
+                        <img src="img/logo.jpg" alt="Rumdul Coffee Logo" class="w-full h-full object-cover">
+                    </div>
+                    <h1 class="heading-font text-2xl font-bold text-gray-900">RUMDUL<span class="gold-accent"> COFFEE</span></h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link active text-gray-800 font-medium" data-page="home">Home</a>
+                    <a href="#menu" class="nav-link text-gray-800 font-medium" data-page="menu">Menu</a>
+                    <a href="#about" class="nav-link text-gray-800 font-medium" data-page="about">About Us</a>
+                    <a href="#contact" class="nav-link text-gray-800 font-medium" data-page="contact">Contact</a>
+                    
+                    <!-- Foodpanda Button -->
+                    <button id="desktop-foodpanda-btn" class="foodpanda-btn">
+                        <i class="fas fa-motorcycle"></i>
+                        Order Now
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-800 text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Single Page Container with Sections -->
+    <div id="single-page" class="scroll-container">
+        <!-- Home Section -->
+        <section id="home" class="hero-section min-h-screen flex items-center justify-center relative section">
+            <div class="container mx-auto px-4 py-20 relative z-10 text-center">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="accent-font text-3xl md:text-4xl text-white mb-4">Welcome to</h2>
+                    <h1 class="heading-font text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6">RUMDUL COFFEE</h1>
+                    <p class="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto"> Coffee experience for the Gen Z lifestyle</p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+                        <a href="#menu" class="genz-button genz-button-primary flex items-center justify-center">
+                            <i class="fas fa-mug-hot"></i> 
+                            <span>View Our Menu</span>
+                        </a>
+                        <button id="hero-foodpanda-btn" class="foodpanda-btn flex items-center justify-center">
+                            <i class="fas fa-motorcycle"></i> 
+                            <span>Order Delivery</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+                <a href="#menu" class="text-white text-4xl animate-bounce">
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Menu Section -->
+        <section id="menu" class="bg-white section">
+            <div class="container mx-auto px-4">
+                <h2 class="heading-font text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">Our Menu</h2>
+                <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">Discover our modern twist on Vietnamese classics and innovative drinks</p>
+                
+                <!-- Category Filter Tabs - Horizontal Scrollable -->
+                <div class="mb-10">
+                    <div class="tabs-container">
+                        <!-- Tabs will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Menu Items Grid - 2 cards per row on mobile -->
+                <div id="menu-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Menu items will be generated by JavaScript -->
+                </div>
+
+                <!-- No items message -->
+                <div id="no-items-message" class="hidden text-center py-12">
+                    <p class="text-xl text-gray-500">No menu items found in this category.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Section - Modern Redesign -->
+        <section id="about" class="bg-gradient-to-b from-gray-50 to-white section">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Modern Header -->
+                    <div class="text-center mb-16">
+                        <span class="inline-block bg-gradient-to-r from-yellow-100 to-pink-100 text-gray-800 text-sm font-semibold px-4 py-2 rounded-full mb-4">
+                            <!-- <i class="fas fa-heart mr-2 gold-accent"></i> Our Journey -->
+                        </span>
+                        <h2 class="heading-font text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                            The <span class="gradient-text">RUMDUL</span> Story
+                        </h2>
+                        <div class="modern-divider"></div>
+                        <p class="text-gray-600 text-lg max-w-3xl mx-auto">
+                            Where tradition meets modern coffee culture
+                        </p>
+                    </div>
+                    
+                    <!-- Modern Content Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                        <div class="order-2 lg:order-1">
+                            <div class="story-card p-8 md:p-10 floating-element">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 gold-bg rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-seedling text-white text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="heading-font text-2xl font-bold text-gray-900">From Humble Beginnings</h3>
+                                        <p class="text-gray-500 text-sm">Established 2018</p>
+                                    </div>
+                                </div>
+                                
+                                <p class="text-gray-600 mb-4 text-lg">Rumdul Coffee was born from a simple vision: to bring the authentic taste of Vietnamese coffee to Phnom Penh while creating a modern space that resonates with today's generation.</p>
+                                <p class="text-gray-600 mb-4 text-lg">Named after Cambodia's national flower, the Rumdul represents purity and beauty - values we infuse into every cup we serve.</p>
+                                <p class="text-gray-600 text-lg">What started as a small family dream has grown into a beloved community hub where tradition meets innovation.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="order-1 lg:order-2">
+                            <div class="square-img-container rounded-3xl overflow-hidden modern-shadow">
+                                <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-yellow-50 to-pink-50">
+                                    <div class="text-center p-8">
+                                        <i class="fas fa-store text-6xl mb-4 gold-accent"></i>
+                                        <h4 class="text-2xl font-bold text-gray-800 mb-2">Our Modern Space</h4>
+                                        <p class="text-gray-600">Designed for connection and creativity</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Modern Philosophy Cards -->
+                    <div class="mb-16">
+                        <h3 class="heading-font text-3xl font-bold text-center text-gray-900 mb-12">Our Philosophy</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div class="genz-card p-6 text-center hover:border-gold transition-all">
+                                <div class="w-16 h-16 gold-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-leaf text-white text-2xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">Quality First</h4>
+                                <p class="text-gray-600 text-sm">We source premium Vietnamese beans and fresh ingredients for every drink.</p>
+                            </div>
+                            
+                            <div class="genz-card p-6 text-center hover:border-gold transition-all">
+                                <div class="w-16 h-16 gold-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-history text-white text-2xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">Tradition Respected</h4>
+                                <p class="text-gray-600 text-sm">Authentic phin filter brewing methods preserved from generations.</p>
+                            </div>
+                            
+                            <div class="genz-card p-6 text-center hover:border-gold transition-all">
+                                <div class="w-16 h-16 gold-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-lightbulb text-white text-2xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">Innovation Embraced</h4>
+                                <p class="text-gray-600 text-sm">Creative twists on classics for the modern coffee enthusiast.</p>
+                            </div>
+                            
+                            <div class="genz-card p-6 text-center hover:border-gold transition-all">
+                                <div class="w-16 h-16 gold-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-users text-white text-2xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">Community Focused</h4>
+                                <p class="text-gray-600 text-sm">A space that brings people together over great coffee.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Modern Milestones -->
+                    <div class="story-card p-8 md:p-10">
+                        <h3 class="heading-font text-3xl font-bold text-center text-gray-900 mb-10">Our Journey Timeline</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="text-center p-6 border border-gray-200 rounded-2xl hover:border-gold transition-colors">
+                                <div class="text-4xl font-bold gold-accent mb-2">2018</div>
+                                <h4 class="text-lg font-bold text-gray-900 mb-2">The Beginning</h4>
+                                <p class="text-gray-600 text-sm">Opened our first location with a dream to share Vietnamese coffee culture.</p>
+                            </div>
+                            
+                            <div class="text-center p-6 border border-gray-200 rounded-2xl hover:border-gold transition-colors">
+                                <div class="text-4xl font-bold gold-accent mb-2">2020</div>
+                                <h4 class="text-lg font-bold text-gray-900 mb-2">Community Growth</h4>
+                                <p class="text-gray-600 text-sm">Became a local favorite spot for students, creatives, and coffee lovers.</p>
+                            </div>
+                            
+                            <div class="text-center p-6 border border-gray-200 rounded-2xl hover:border-gold transition-colors">
+                                <div class="text-4xl font-bold gold-accent mb-2">2023</div>
+                                <h4 class="text-lg font-bold text-gray-900 mb-2">Modern Evolution</h4>
+                                <p class="text-gray-600 text-sm">Redesigned our space and menu for the Gen Z coffee experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="bg-white section">
+            <div class="container mx-auto px-4">
+                <h2 class="heading-font text-4xl md:text-5xl font-bold text-center text-gray-900 mb-8">Visit Us</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                    <!-- Contact Information -->
+                    <div>
+                        <div class="genz-card p-8 h-full">
+                            <h3 class="heading-font text-3xl font-bold text-gray-900 mb-6">Get In Touch</h3>
+                            
+                            <div class="space-y-6 mb-8">
+                                <div class="flex items-start">
+                                    <div class="gold-bg text-white rounded-full w-12 h-12 flex items-center justify-center mr-4 flex-shrink-0">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-gray-900 mb-1">Location</h4>
+                                        <p class="text-gray-600">GWQ6+R93, Street 454, Phnom Penh, Cambodia</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="gold-bg text-white rounded-full w-12 h-12 flex items-center justify-center mr-4 flex-shrink-0">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-gray-900 mb-1">Phone Number</h4>
+                                        <p class="text-gray-600">097 766 8989</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="gold-bg text-white rounded-full w-12 h-12 flex items-center justify-center mr-4 flex-shrink-0">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-gray-900 mb-1">Opening Hours</h4>
+                                        <p class="text-gray-600">Monday - Sunday: 7:00 AM - 10:00 PM</p>
+                                        <p class="text-gray-500 text-sm mt-1">Open daily, including holidays</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Foodpanda Button in Contact Section -->
+                            <div class="mb-8">
+                                <button id="contact-foodpanda-btn" class="foodpanda-btn w-full justify-center py-4">
+                                    <i class="fas fa-motorcycle"></i>
+                                    Order Delivery on Foodpanda
+                                </button>
+                            </div>
+                            
+                            <div class="border-t border-gray-200 pt-6">
+                                <h4 class="text-xl font-bold text-gray-900 mb-4">Follow Us</h4>
+                                <div class="flex space-x-4">
+                                    <a href="#" class="w-12 h-12 rounded-full gold-bg text-white flex items-center justify-center hover:scale-110 transform transition-transform">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="#" class="w-12 h-12 rounded-full gold-bg text-white flex items-center justify-center hover:scale-110 transform transition-transform">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="w-12 h-12 rounded-full gold-bg text-white flex items-center justify-center hover:scale-110 transform transition-transform">
+                                        <i class="fab fa-tiktok"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Google Maps -->
+                    <div>
+                        <div class="genz-card overflow-hidden h-full">
+                            <div class="p-6">
+                                <h4 class="text-2xl font-bold text-gray-900 mb-4">Find Us Here</h4>
+                                <p class="text-gray-600 mb-6">We're located on Street 454, just a 5-minute walk from the Central Market. Look for our distinctive modern storefront.</p>
+                            </div>
+                            <div class="map-container h-96">
+                                <iframe 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16642.246034038515!2d104.90607830873158!3d11.539384453367589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109510007b07427%3A0x31027175cc987c47!2sRUMDUL%20COFFEE!5e1!3m2!1sen!2skh!4v1767666762267!5m2!1sen!2skh" 
+                                    width="100%" 
+                                    height="100%" 
+                                    style="border:0;" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand Column -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 rounded-full overflow-hidden mr-4">
+                            <img src="img/logo.jpg" alt="Rumdul Coffee Logo" class="w-full h-full object-cover">
+                        </div>
+                        <h2 class="heading-font text-2xl font-bold">RUMDUL<span class="gold-accent"> COFFEE</span></h2>
+                    </div>
+                    <p class="text-gray-300 mb-4 max-w-md"> Coffee experience for the Gen Z lifestyle. Perfectly brewed, passionately served in the heart of Phnom Penh.</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-300 hover:text-gold transition-colors">Home</a></li>
+                        <li><a href="#menu" class="text-gray-300 hover:text-gold transition-colors">Menu</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-gold transition-colors">About Us</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-gold transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Contact Info</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt gold-accent mr-3 mt-1"></i>
+                            <p class="text-gray-300">GWQ6+R93, St 454, Phnom Penh</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone gold-accent mr-3"></i>
+                            <p class="text-gray-300">097 766 8989</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-clock gold-accent mr-3"></i>
+                            <p class="text-gray-300">7:00 AM - 10:00 PM Daily</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Divider -->
+            <div class="border-t border-gray-800 pt-6 mt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2026 RUMDUL COFFEE. All rights reserved.</p>
+                    
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Menu data organized by category - FIXED: Removed "Popular" from all categories
+        const menuData = {
+            "Popular": [
+                { 
+                    name: "ORANGE JUICE", 
+                    price: "$2.25", 
+                    description: "Freshly squeezed orange juice",
+                    imageSrc: "img/pro-01.webp",
+                    imageAlt: "Orange Juice",
+                    isPopular: true
+                },
+                { 
+                    name: "SAI GON BLACK COFFEE", 
+                    price: "$1.65", 
+                    description: "Coffee brewed with a filter and a little ice.",
+                    imageSrc: "img/pro-02.webp",
+                    imageAlt: "Saigon Black Coffee",
+                    isPopular: true
+                },
+                { 
+                    name: "SALTED CREAM COFFEE (Coffee Muoi)", 
+                    price: "$2", 
+                    description: "Filtered coffee, milk, topped with homemade salted cream.",
+                    imageSrc: "img/pro-02.webp",
+                    imageAlt: "Salted Cream Coffee",
+                    isPopular: true
+                },
+                { 
+                    name: "GREEN TEA WITH BITTER GOURD", 
+                    price: "$2.75", 
+                    description: "Unique green tea with bitter gourd.",
+                    imageSrc: "img/pro-01.webp",
+                    imageAlt: "Green Tea with Bitter Gourd",
+                    isPopular: true
+                }
+            ],
+                "Vietnamese Coffee": [
+                { 
+                    name: "SAI GON BLACK COFFEE", 
+                    price: "$1.65", 
+                    description: "Coffee brewed with a filter and a little ice.",
+                    imageSrc: "img/pro-01.webp",
+                    imageAlt: "Saigon Black Coffee"
+                },
+                { 
+                    name: "SAI GON MILK COFFEE", 
+                    price: "$1.75", 
+                    description: "Vietnamese filter coffee, milk, and ice.",
+                    imageSrc: "img/pro-02.webp",
+                    imageAlt: "Saigon Milk Coffee"
+                },
+                { 
+                    name: "WHITE COFFEE (BAC XIU)", 
+                    price: "$1.75", 
+                    description: "Filter coffee, fresh milk, and condensed milk.",
+                    imageSrc: "img/pro-03.webp",
+                    imageAlt: "White Coffee"
+                },
+                { 
+                    name: "SALTED CREAM COFFEE (Coffee Muoi)", 
+                    price: "$2", 
+                    description: "Filtered coffee, milk, topped with homemade salted cream.",
+                    imageSrc: "img/pro-04.webp",
+                    imageAlt: "Salted Cream Coffee"
+                },
+                { 
+                    name: "EGG CREAM COFFEE (Coffee Trung)", 
+                    price: "$2", 
+                    description: "Filtered coffee, milk, and homemade egg cream.",
+                    imageSrc: "img/pro-05.webp",
+                    imageAlt: "Egg Cream Coffee"
+                },
+                { 
+                    name: "COCONUT COFFEE", 
+                    price: "$2.50", 
+                    description: "Filter coffee, milk, coconut milk, toasted coconut flakes.",
+                    imageSrc: "img/pro-06.webp",
+                    imageAlt: "Coconut Coffee"
+                }
+            ],
+            "Italian Coffee": [
+                { 
+                    name: "ESPRESSO", 
+                    price: "$1.50", 
+                    description: "Strong and concentrated coffee.",
+                    imageSrc: "img/pro-07.webp",
+                    imageAlt: "Espresso"
+                },
+                { 
+                    name: "MILK ESPRESSO", 
+                    price: "$1.75", 
+                    description: "Espresso with steamed milk.",
+                    imageSrc: "img/pro-08.webp",
+                    imageAlt: "Milk Espresso"
+                },
+                { 
+                    name: "AMERICANO", 
+                    price: "$1.75", 
+                    description: "Espresso diluted with hot water.",
+                    imageSrc: "img/pro-09.webp",
+                    imageAlt: "Americano"
+                }
+            ],
+            "Matcha": [
+                { 
+                    name: "MATCHA LATTE", 
+                    price: "$2.75", 
+                    description: "Ceremonial grade matcha with milk.",
+                    imageSrc: "img/pro-10.webp",
+                    imageAlt: "Matcha Latte"
+                },
+                { 
+                    name: "SALT FOAM MATCHA LATTE", 
+                    price: "$2.75", 
+                    description: "Matcha latte topped with salted foam.",
+                    imageSrc: "img/pro-11.webp",
+                    imageAlt: "Salt Foam Matcha Latte"
+                },
+                { 
+                    name: "EGG CREAM MATCHA LATTE", 
+                    price: "$2.75", 
+                    description: "Matcha latte with homemade egg cream.",
+                    imageSrc: "img/pro-12.webp",
+                    imageAlt: "Egg Cream Matcha Latte"
+                },
+                { 
+                    name: "MANGO MATCHA LATTE", 
+                    price: "$2.75", 
+                    description: "Matcha latte with fresh mango puree.",
+                    imageSrc: "img/pro-13.webp",
+                    imageAlt: "Mango Matcha Latte"
+                },
+                { 
+                    name: "STRAWBERRY MATCHA LATTE", 
+                    price: "$2.75", 
+                    description: "Matcha latte with strawberry syrup.",
+                    imageSrc: "img/pro-14.webp",
+                    imageAlt: "Strawberry Matcha Latte"
+                }
+            ],
+            "Hot Drink": [
+                { 
+                    name: "HOT CACAO", 
+                    price: "$1.75", 
+                    description: "Rich hot chocolate drink.",
+                    imageSrc: "img/pro-15.webp",
+                    imageAlt: "Hot Cacao"
+                },
+                { 
+                    name: "GINGER HONEY TEA", 
+                    price: "$1.50", 
+                    description: "Soothing ginger tea with honey.",
+                    imageSrc: "img/pro-16.webp",
+                    imageAlt: "Ginger Honey Tea"
+                }
+            ],
+            "Tropical Fruit Tea": [
+                { 
+                    name: "FRESH PEACH BLACK TEA", 
+                    price: "$2.25", 
+                    description: "Black tea infused with fresh peach.",
+                    imageSrc: "img/pro-17.webp",
+                    imageAlt: "Fresh Peach Black Tea"
+                },
+                { 
+                    name: "PINK GUAVA & RED DRAGON FRUIT TEA", 
+                    price: "$2.50", 
+                    description: "Exotic fruit tea blend.",
+                    imageSrc: "img/pro-18.webp",
+                    imageAlt: "Pink Guava & Red Dragon Fruit Tea"
+                },
+                { 
+                    name: "GOLDEN CANTALOUPE TEA", 
+                    price: "$2.25", 
+                    description: "Refreshing cantaloupe infused tea.",
+                    imageSrc: "img/pro-19.webp",
+                    imageAlt: "Golden Cantaloupe Tea"
+                },
+                { 
+                    name: "MANGO PASSION FRUIT TEA", 
+                    price: "$2.50", 
+                    description: "Tropical mango and passion fruit tea.",
+                    imageSrc: "img/pro-20.webp",
+                    imageAlt: "Mango Passion Fruit Tea"
+                }
+            ],
+            "Fresh Juice": [
+                { 
+                    name: "ORANGE JUICE", 
+                    price: "$2.25", 
+                    description: "Freshly squeezed orange juice.",
+                    imageSrc: "img/pro-21.webp",
+                    imageAlt: "Orange Juice"
+                },
+                { 
+                    name: "CARROT JUICE", 
+                    price: "$2.25", 
+                    description: "Fresh carrot juice.",
+                    imageSrc: "img/pro-22.webp",
+                    imageAlt: "Carrot Juice"
+                },
+                { 
+                    name: "PINEAPPLE JUICE", 
+                    price: "$2.25", 
+                    description: "Fresh pineapple juice.",
+                    imageSrc: "img/pro-23.webp",
+                    imageAlt: "Pineapple Juice"
+                }
+            ],
+            "Smoothies": [
+                { 
+                    name: "STRAWBERRY YOGURT SMOOTHIE", 
+                    price: "$2.75", 
+                    description: "Strawberries blended with yogurt.",
+                    imageSrc: "img/pro-24.webp",
+                    imageAlt: "Strawberry Yogurt Smoothie"
+                },
+                { 
+                    name: "BLUEBERRY YOGURT SMOOTHIE", 
+                    price: "$2.75", 
+                    description: "Blueberries blended with yogurt.",
+                    imageSrc: "img/pro-25.webp",
+                    imageAlt: "Blueberry Yogurt Smoothie"
+                },
+                { 
+                    name: "PINK GUAVA YOGURT SMOOTHIE", 
+                    price: "$2.75", 
+                    description: "Pink guava blended with yogurt.",
+                    imageSrc: "img/pro-26.webp",
+                    imageAlt: "Pink Guava Yogurt Smoothie"
+                },
+                { 
+                    name: "TROPICAL MANGO COCONUT SMOOTHIE", 
+                    price: "$2.75", 
+                    description: "Mango and coconut milk smoothie.",
+                    imageSrc: "img/pro-27.webp",
+                    imageAlt: "Tropical Mango Coconut Smoothie"
+                },
+                { 
+                    name: "RIPE AVOCADO & YOUNG COCONUT SMOOTHIE", 
+                    price: "$2.75", 
+                    description: "Avocado and young coconut blend.",
+                    imageSrc: "img/pro-28.webp",
+                    imageAlt: "Avocado Coconut Smoothie"
+                },
+                { 
+                    name: "BANANA SMOOTHIE", 
+                    price: "$2.75", 
+                    description: "Creamy banana smoothie.",
+                    imageSrc: "img/pro-29.webp",
+                    imageAlt: "Banana Smoothie"
+                }
+            ],
+            "Signature": [
+                { 
+                    name: "GREEN TEA WITH BITTER GOURD", 
+                    price: "$2.75", 
+                    description: "Unique green tea with bitter gourd.",
+                    imageSrc: "img/pro-30.webp",
+                    imageAlt: "Green Tea with Bitter Gourd"
+                }
+            ],
+            "Toppings": [
+                { 
+                    name: "Socola Pudding", 
+                    price: "$0.75", 
+                    description: "Rich chocolate pudding.",
+                    imageSrc: "img/pro-31.webp",
+                    imageAlt: "Chocolate Pudding"
+                },
+                { 
+                    name: "Taro Pudding", 
+                    price: "$0.75", 
+                    description: "Sweet taro flavored pudding.",
+                    imageSrc: "img/pro-32.webp",
+                    imageAlt: "Taro Pudding"
+                },
+                { 
+                    name: "Egg Pudding", 
+                    price: "$0.75", 
+                    description: "Creamy egg custard pudding.",
+                    imageSrc: "img/pro-33.webp",
+                    imageAlt: "Egg Pudding"
+                },
+                { 
+                    name: "Salted Ice Cream", 
+                    price: "$0.50", 
+                    description: "Homemade salted ice cream.",
+                    imageSrc: "img/pro-34.webp",
+                    imageAlt: "Salted Ice Cream"
+                },
+                { 
+                    name: "Egg Cream", 
+                    price: "$0.50", 
+                    description: "Homemade egg cream topping.",
+                    imageSrc: "img/pro-35.webp",
+                    imageAlt: "Egg Cream"
+                }
+            ],
+            "Breadsticks": [
+                { 
+                    name: "Breadstick (single)", 
+                    price: "$1.50", 
+                    description: "Breadsticks with pate and shredded pork floss.",
+                    imageSrc: "img/pro-36.webp",
+                    imageAlt: "Breadstick"
+                }
+            ]
+        };
+
+        // DOM elements
+        const menuContainer = document.getElementById('menu-container');
+        const noItemsMessage = document.getElementById('no-items-message');
+        const tabsContainer = document.querySelector('.tabs-container');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileCloseButton = document.getElementById('mobile-close-button');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const foodpandaModal = document.getElementById('foodpanda-modal');
+        const closeModalButtons = document.querySelectorAll('#close-modal, #close-modal-btn');
+        const openModalButtons = document.querySelectorAll('#desktop-foodpanda-btn, #hero-foodpanda-btn, #contact-foodpanda-btn, #mobile-foodpanda-btn');
+
+        // Current active category
+        let activeCategory = "Popular";
+
+                // Function to create a menu item card
+function createMenuItemCard(item) {
+    const imgFallback = `onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2YwZjBmMCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIiBmaWxsPSIjNjY2Ij5Qcm9kdWN0IEltYWdlPC90ZXh0Pjwvc3ZnPg=='"`;
+    
+    return `
+        <div class="genz-card">
+            <!-- Simple clickable image without hover effect -->
+            <div class="square-img-container clickable-image" data-item='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
+                <img src="${item.imageSrc}" alt="${item.imageAlt}" class="product-img" ${imgFallback}>
+                ${item.isPopular ? '<div class="popular-badge">🔥 Popular</div>' : ''}
+            </div>
+            
+            <!-- Item details -->
+            <div class="p-5 flex flex-col flex-grow">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">${item.name}</h3>
+                
+                <p class="gold-accent font-bold text-xl mb-3">${item.price}</p>
+                
+                <p class="text-gray-600 text-sm mb-4 flex-grow">${item.description}</p>
+                
+                <!-- Order button -->
+                <button class="genz-button genz-button-primary order-btn mt-auto" data-item='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
+                    <i class="fas fa-shopping-cart"></i> Order Now
+                </button>
+            </div>
+        </div>
+    `;
+}
+        // Function to render menu items for a category
+function renderMenuItems(category) {
+    // Clear the current menu items
+    menuContainer.innerHTML = '';
+    
+    // Get items for the selected category
+    const items = menuData[category];
+    
+    // If no items, show message
+    if (!items || items.length === 0) {
+        noItemsMessage.classList.remove('hidden');
+        return;
+    }
+    
+    // Hide "no items" message
+    noItemsMessage.classList.add('hidden');
+    
+    // Add items to the container
+    items.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.innerHTML = createMenuItemCard(item);
+        menuContainer.appendChild(itemElement.firstElementChild);
+    });
+    
+    // Add event listeners to order buttons
+    document.querySelectorAll('.order-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            openFoodpandaModal();
+        });
+    });
+    
+    // Add event listeners to clickable images
+    document.querySelectorAll('.clickable-image').forEach(imageContainer => {
+        imageContainer.addEventListener('click', function() {
+            openFoodpandaModal();
+        });
+    });
+}
+
+        // Function to create category tabs
+        function createCategoryTabs() {
+            const categories = Object.keys(menuData);
+            
+            categories.forEach(category => {
+                const tab = document.createElement('button');
+                tab.className = `genz-tab ${category === activeCategory ? 'active-tab' : ''}`;
+                tab.textContent = category;
+                tab.dataset.category = category;
+                
+                tab.addEventListener('click', () => {
+                    // Update active tab
+                    document.querySelectorAll('.genz-tab').forEach(btn => {
+                        btn.classList.remove('active-tab');
+                    });
+                    tab.classList.add('active-tab');
+                    
+                    // Update active category and render items
+                    activeCategory = category;
+                    renderMenuItems(activeCategory);
+                    
+                    // Scroll menu section into view on mobile
+                    if (window.innerWidth < 768) {
+                        document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+                
+                tabsContainer.appendChild(tab);
+            });
+        }
+
+        // Function to open foodpanda modal
+        function openFoodpandaModal(item = null) {
+            foodpandaModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Function to close foodpanda modal
+        function closeFoodpandaModal() {
+            foodpandaModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Function to open mobile menu
+        function openMobileMenu() {
+            mobileMenuOverlay.classList.add('active');
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Function to close mobile menu
+        function closeMobileMenu() {
+            mobileMenuOverlay.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Initialize the page
+        function init() {
+            // Create category tabs
+            createCategoryTabs();
+            
+            // Render initial menu items
+            renderMenuItems(activeCategory);
+            
+            // Set up navigation links for smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Close mobile menu if open
+                        closeMobileMenu();
+                        
+                        // Scroll to section
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Update active nav link
+                        document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    }
+                });
+            });
+            
+            // Mobile menu toggle
+            mobileMenuButton.addEventListener('click', openMobileMenu);
+            mobileCloseButton.addEventListener('click', closeMobileMenu);
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+            
+            // Foodpanda modal buttons
+            openModalButtons.forEach(button => {
+                button.addEventListener('click', openFoodpandaModal);
+            });
+            
+            closeModalButtons.forEach(button => {
+                button.addEventListener('click', closeFoodpandaModal);
+            });
+            
+            // Close modal when clicking outside
+            foodpandaModal.addEventListener('click', (e) => {
+                if (e.target === foodpandaModal) {
+                    closeFoodpandaModal();
+                }
+            });
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+            
+            // Update active nav link on scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section');
+                const scrollPos = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            });
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
