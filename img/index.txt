@@ -9,15 +9,45 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 50%;
+    background-color: var(--gold);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: var(--gold);
+}
+
         /* Custom CSS - Modern Gen Z Style */
         :root {
-            --gold: #D4AF37;
+            --gold: #FFD700;
             --light-gold: #FFF9C4;
-            --dark-gold: #B8860B;
+            --dark-gold: #FFC107;
             --cream: #FFFBF0;
             --coffee: #4A2C2A;
             --soft-brown: #D7CCC8;
@@ -27,7 +57,7 @@
         }
         
         body {
-            font-family: 'Manrope', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--cream);
             color: #333;
             overflow-x: hidden;
@@ -35,12 +65,12 @@
         }
         
         .heading-font {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Poppins', sans-serif;
             font-weight: 700;
         }
         
         .accent-font {
-            font-family: 'Manrope', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
         }
         
         .gold-accent {
@@ -66,16 +96,6 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             background: white;
             border: 1px solid #f5f5f5;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
         
         .genz-card:hover {
@@ -608,7 +628,7 @@
         .mobile-nav-link.active::after {
             width: calc(100% - 48px);
         }
-    </style>
+</style>
 </head>
 <body class="relative">
     <!-- Foodpanda Order Modal -->
@@ -777,7 +797,7 @@
                 <div class="max-w-4xl mx-auto">
                     <h2 class="accent-font text-3xl md:text-4xl text-white mb-4">Welcome to</h2>
                     <h1 class="heading-font text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6">RUMDUL COFFEE</h1>
-                    <p class="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto">Experience a variety of coffees from Vietnamese classics to Italian espresso and more</p>
+                    <p class="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto"> Coffee experience for the Gen Z lifestyle</p>
                     
                     <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
                         <a href="#menu" class="genz-button genz-button-primary flex items-center justify-center">
@@ -804,7 +824,7 @@
         <section id="menu" class="bg-white section">
             <div class="container mx-auto px-4">
                 <h2 class="heading-font text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">Our Menu</h2>
-                <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">Discover our modern twist on Vietnamese classics, Italian favorites, and innovative drinks</p>
+                <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">Discover our selection of Vietnamese, Italian, and other international coffees along with innovative drinks</p>
                 
                 <!-- Category Filter Tabs - Horizontal Scrollable -->
                 <div class="mb-10">
@@ -839,7 +859,7 @@
                         </h2>
                         <div class="modern-divider"></div>
                         <p class="text-gray-600 text-lg max-w-3xl mx-auto">
-                            Where tradition meets modern coffee culture with a variety of brews from around the world
+                            Where tradition meets modern coffee culture
                         </p>
                     </div>
                     
@@ -864,8 +884,14 @@
                         </div>
                         
                         <div class="order-1 lg:order-2">
-                            <div class="square-img-container rounded-3xl overflow-hidden modern-shadow" style="background-image: url('img/mycafee.jpg'); background-size: cover; background-position: center;">
-                                <!-- Optional overlay or text if needed -->
+                            <div class="square-img-container rounded-3xl overflow-hidden modern-shadow">
+                                <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-yellow-50 to-pink-50">
+                                    <div class="text-center p-8">
+                                        <i class="fas fa-store text-6xl mb-4 gold-accent"></i>
+                                        <h4 class="text-2xl font-bold text-gray-800 mb-2">Our Modern Space</h4>
+                                        <p class="text-gray-600">Designed for connection and creativity</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1387,136 +1413,12 @@
                     imageAlt: "Egg Cream"
                 }
             ],
-            "Merry Christmas": [
-                { 
-                    name: "Random Christmas Cup + Classic Black Milk Tea", 
-                    price: "$5.75", 
-                    description: "This reusable hard plastic Christmas mug is perfect for office workers.",
-                    imageSrc: "img/pro-36.webp",
-                    imageAlt: "Christmas Cup Combo",
-                    isPopular: true
-                },
-                { 
-                    name: "Random Christmas Cup + FRESH MILK WITH BLACK SUGAR PEARLS", 
-                    price: "$6", 
-                    description: "This reusable hard plastic Christmas mug is perfect for office workers.",
-                    imageSrc: "img/pro-37.webp",
-                    imageAlt: "Christmas Cup Combo",
-                    isPopular: true
-                },
-                { 
-                    name: "Random Christmas Cup + CHARCOAL ROASTED OOLONG MILK TEA", 
-                    price: "$5.75", 
-                    description: "This reusable hard plastic Christmas mug is perfect for office workers.",
-                    imageSrc: "img/pro-38.webp",
-                    imageAlt: "Christmas Cup Combo",
-                    isPopular: true
-                },
-                { 
-                    name: "Random Christmas Cup + CHARCOAL ROASTED OOLONG MILK TEA", 
-                    price: "$5.75", 
-                    description: "This reusable hard plastic Christmas mug is perfect for office workers.",
-                    imageSrc: "img/pro-39.webp",
-                    imageAlt: "Christmas Cup Combo",
-                    isPopular: true
-                }
-            ],
-            "Combo Coffee & Breadsticks": [
-                { 
-                    name: "SAI GON BLACK COFFEE + Breadsticks", 
-                    price: "$2.46 <span class='discount-price'>$2.90</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-40.webp",
-                    imageAlt: "Coffee Combo"
-                },
-                { 
-                    name: "SAI GON MILK COFFEE + Breadsticks", 
-                    price: "$2.55 <span class='discount-price'>$3</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-41.webp",
-                    imageAlt: "Coffee Combo"
-                },
-                { 
-                    name: "SALTED CREAM COFFEE + Breadsticks", 
-                    price: "$2 <span class='discount-price'>$3.25</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-42.webp",
-                    imageAlt: "Coffee Combo"
-                },
-                { 
-                    name: "EGG CREAM COFFEE + Breadsticks", 
-                    price: "$2 <span class='discount-price'>$3.25</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-43.webp",
-                    imageAlt: "Coffee Combo"
-                }
-            ],
-            "Combo Tropical Fruit Tea & Breadsticks": [
-                { 
-                    name: "FRESH PEACH BLACK TEA + Breadsticks", 
-                    price: "$2.98 <span class='discount-price'>$3.50</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-44.webp",
-                    imageAlt: "Tea Combo"
-                },
-                { 
-                    name: "GOLDEN CANTALOUPE TEA + Breadsticks", 
-                    price: "$2.98 <span class='discount-price'>$3.50</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-45.webp",
-                    imageAlt: "Tea Combo"
-                },
-                { 
-                    name: "MANGO PASSION FRUIT TEA + Breadsticks", 
-                    price: "$2.50 <span class='discount-price'>$3.75</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-46.webp",
-                    imageAlt: "Tea Combo"
-                },
-                { 
-                    name: "ORANGE JUICE + Breadsticks", 
-                    price: "$2.98 <span class='discount-price'>$3.50</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-47.webp",
-                    imageAlt: "Juice Combo"
-                }
-            ],
-            "Combo Matcha + Breadsticks": [
-                { 
-                    name: "MATCHA LATTE + Breadsticks", 
-                    price: "$2.75 <span class='discount-price'>$3.75</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-48.webp",
-                    imageAlt: "Matcha Combo"
-                },
-                { 
-                    name: "SALT FOAM MATCHA LATTE + Breadsticks", 
-                    price: "$2.75 <span class='discount-price'>$4</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-49.webp",
-                    imageAlt: "Matcha Combo"
-                },
-                { 
-                    name: "EGG CREAM MATCHA LATTE + Breadsticks", 
-                    price: "$2.75 <span class='discount-price'>$4</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-50.webp",
-                    imageAlt: "Matcha Combo"
-                },
-                { 
-                    name: "MANGO MATCHA LATTE + Breadsticks", 
-                    price: "$2.75 <span class='discount-price'>$4</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-51.webp",
-                    imageAlt: "Matcha Combo"
-                }
-            ],
             "Breadsticks": [
                 { 
                     name: "Breadstick (single)", 
-                    price: "$1.27 <span class='discount-price'>$1.50</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-52.webp",
+                    price: "$1.50", 
+                    description: "Breadsticks with pate and shredded pork floss.",
+                    imageSrc: "img/pro-36.webp",
                     imageAlt: "Breadstick"
                 }
             ]
@@ -1537,7 +1439,7 @@
         // Current active category
         let activeCategory = "Popular";
 
-        // Function to create a menu item card
+                // Function to create a menu item card
 function createMenuItemCard(item) {
     const imgFallback = `onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2YwZjBmMCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIiBmaWxsPSIjNjY2Ij5Qcm9kdWN0IEltYWdlPC90ZXh0Pjwvc3ZnPg=='"`;
     
@@ -1583,9 +1485,8 @@ function renderMenuItems(category) {
     noItemsMessage.classList.add('hidden');
     
     // Add items to the container
-    items.forEach((item, index) => {
+    items.forEach(item => {
         const itemElement = document.createElement('div');
-        itemElement.style.animationDelay = `${index * 0.1}s`; // Stagger animation for cards
         itemElement.innerHTML = createMenuItemCard(item);
         menuContainer.appendChild(itemElement.firstElementChild);
     });
