@@ -608,20 +608,39 @@
         .mobile-nav-link.active::after {
             width: calc(100% - 48px);
         }
-        /* Discount price styling */
+/* Improved discount price styling - keeps everything on one line */
+.price-with-discount {
+    display: flex;
+    align-items: baseline;     /* Aligns prices nicely by baseline */
+    justify-content: flex-start;
+    gap: 8px;
+    flex-wrap: nowrap;         /* Prevents wrapping to new line */
+    white-space: nowrap;       /* Extra safety */
+    font-size: 0.95em;         /* Slightly smaller on mobile for better fit */
+}
+
 .old-price {
     color: #999;
     text-decoration: line-through;
     font-weight: normal;
-    margin-left: 8px;
-    font-size: 0.9em;
+    font-size: 0.85em;         /* Makes old price a bit smaller */
+    opacity: 0.8;
 }
 
-.price-with-discount {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
+/* Optional: On very small screens, reduce font size slightly more */
+@media (max-width: 639px) {
+    .price-with-discount {
+        font-size: 0.9em;
+        gap: 6px;
+    }
+    
+    .gold-accent.font-bold.text-xl {
+        font-size: 1.1rem !important;  /* Slightly smaller main price on phone */
+    }
+    
+    .old-price {
+        font-size: 0.8em;
+    }
 }
     </style>
 </head>
