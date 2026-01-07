@@ -602,12 +602,27 @@
         }
 
         .mobile-nav-link:hover::after {
-            width: calc(100% - 48px); /* Adjust for padding */
+            width: calc(100% - 48px); 
         }
 
         .mobile-nav-link.active::after {
             width: calc(100% - 48px);
         }
+        /* Discount price styling */
+.old-price {
+    color: #999;
+    text-decoration: line-through;
+    font-weight: normal;
+    margin-left: 8px;
+    font-size: 0.9em;
+}
+
+.price-with-discount {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
     </style>
 </head>
 <body class="relative">
@@ -1421,105 +1436,105 @@
                     isPopular: true
                 }
             ],
-            "Combo Coffee & Breadsticks": [
-                { 
-                    name: "SAI GON BLACK COFFEE + Breadsticks", 
-                    price: "$2.46 <span class='discount-price'>$2.90</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-40.webp",
-                    imageAlt: "Coffee Combo"
-                },
-                { 
-                    name: "SAI GON MILK COFFEE + Breadsticks", 
-                    price: "$2.55 <span class='discount-price'>$3</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-41.webp",
-                    imageAlt: "Coffee Combo"
-                },
-                { 
-                    name: "SALTED CREAM COFFEE + Breadsticks", 
-                    price: "$2 <span class='discount-price'>$3.25</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-42.webp",
-                    imageAlt: "Coffee Combo"
-                },
-                { 
-                    name: "EGG CREAM COFFEE + Breadsticks", 
-                    price: "$2 <span class='discount-price'>$3.25</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-43.webp",
-                    imageAlt: "Coffee Combo"
-                }
-            ],
-            "Combo Tropical Fruit Tea & Breadsticks": [
-                { 
-                    name: "FRESH PEACH BLACK TEA + Breadsticks", 
-                    price: "$2.98 <span class='discount-price'>$3.50</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-44.webp",
-                    imageAlt: "Tea Combo"
-                },
-                { 
-                    name: "GOLDEN CANTALOUPE TEA + Breadsticks", 
-                    price: "$2.98 <span class='discount-price'>$3.50</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-45.webp",
-                    imageAlt: "Tea Combo"
-                },
-                { 
-                    name: "MANGO PASSION FRUIT TEA + Breadsticks", 
-                    price: "$2.50 <span class='discount-price'>$3.75</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-46.webp",
-                    imageAlt: "Tea Combo"
-                },
-                { 
-                    name: "ORANGE JUICE + Breadsticks", 
-                    price: "$2.98 <span class='discount-price'>$3.50</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-47.webp",
-                    imageAlt: "Juice Combo"
-                }
-            ],
-            "Combo Matcha + Breadsticks": [
-                { 
-                    name: "MATCHA LATTE + Breadsticks", 
-                    price: "$2.75 <span class='discount-price'>$3.75</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-48.webp",
-                    imageAlt: "Matcha Combo"
-                },
-                { 
-                    name: "SALT FOAM MATCHA LATTE + Breadsticks", 
-                    price: "$2.75 <span class='discount-price'>$4</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-49.webp",
-                    imageAlt: "Matcha Combo"
-                },
-                { 
-                    name: "EGG CREAM MATCHA LATTE + Breadsticks", 
-                    price: "$2.75 <span class='discount-price'>$4</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-50.webp",
-                    imageAlt: "Matcha Combo"
-                },
-                { 
-                    name: "MANGO MATCHA LATTE + Breadsticks", 
-                    price: "$2.75 <span class='discount-price'>$4</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-51.webp",
-                    imageAlt: "Matcha Combo"
-                }
-            ],
-            "Breadsticks": [
-                { 
-                    name: "Breadstick (single)", 
-                    price: "$1.27 <span class='discount-price'>$1.50</span>", 
-                    description: "Breadsticks with pate and shredded pork floss",
-                    imageSrc: "img/pro-52.webp",
-                    imageAlt: "Breadstick"
-                }
-            ]
+                    "Combo Coffee & Breadsticks": [
+    { 
+        name: "SAI GON BLACK COFFEE + Breadsticks", 
+        price: '<div class="price-with-discount"><span class="gold-accent font-bold text-xl">$2.46</span><span class="old-price">$2.90</span></div>', 
+        description: "Breadsticks with pate and shredded pork floss",
+        imageSrc: "img/pro-40.webp",
+        imageAlt: "Coffee Combo"
+    },
+    { 
+        name: "SAI GON MILK COFFEE + Breadsticks", 
+        price: '<div class="price-with-discount"><span class="gold-accent font-bold text-xl">$2.55</span><span class="old-price">$3.00</span></div>', 
+        description: "Breadsticks with pate and shredded pork floss",
+        imageSrc: "img/pro-41.webp",
+        imageAlt: "Coffee Combo"
+    },
+    { 
+        name: "SALTED CREAM COFFEE + Breadsticks", 
+        price: '<div class="price-with-discount"><span class="gold-accent font-bold text-xl">$2.80</span><span class="old-price">$3.25</span></div>', 
+        description: "Breadsticks with pate and shredded pork floss",
+        imageSrc: "img/pro-42.webp",
+        imageAlt: "Coffee Combo"
+    },
+    { 
+        name: "EGG CREAM COFFEE + Breadsticks", 
+        price: '<div class="price-with-discount"><span class="gold-accent font-bold text-xl">$2.80</span><span class="old-price">$3.25</span></div>', 
+        description: "Breadsticks with pate and shredded pork floss",
+        imageSrc: "img/pro-43.webp",
+        imageAlt: "Coffee Combo"
+    }
+],
+"Combo Tropical Fruit Tea & Breadsticks": [
+    { 
+        name: "FRESH PEACH BLACK TEA + Breadsticks", 
+        price: '<div class="price-with-discount"><span class="gold-accent font-bold text-xl">$2.98</span><span class="old-price">$3.50</span></div>', 
+        description: "Breadsticks with pate and shredded pork floss",
+        imageSrc: "img/pro-44.webp",
+        imageAlt: "Tea Combo"
+    },
+    { 
+        name: "GOLDEN CANTALOUPE TEA + Breadsticks", 
+        price: '<div class="price-with-discount"><span class="gold-accent font-bold text-xl">$2.98</span><span class="old-price">$3.50</span></div>', 
+        description: "Breadsticks with pate and shredded pork floss",
+        imageSrc: "img/pro-45.webp",
+        imageAlt: "Tea Combo"
+    },
+    { 
+        name: "MANGO PASSION FRUIT TEA + Breadsticks", 
+        price: '<div class="price-with-discount"><span class="gold-accent font-bold text-xl">$3.20</span><span class="old-price">$3.75</span></div>', 
+        description: "Breadsticks with pate and shredded pork floss",
+        imageSrc: "img/pro-46.webp",
+        imageAlt: "Tea Combo"
+    },
+    { 
+        name: "ORANGE JUICE + Breadsticks", 
+        price: '<div class="price-with-discount"><span class="gold-accent font-bold text-xl">$2.98</span><span class="old-price">$3.50</span></div>', 
+        description: "Breadsticks with pate and shredded pork floss",
+        imageSrc: "img/pro-47.webp",
+        imageAlt: "Juice Combo"
+    }
+],
+"Combo Matcha + Breadsticks": [
+    { 
+        name: "MATCHA LATTE + Breadsticks", 
+        price: '<div class="price-with-discount"><span class="gold-accent font-bold text-xl">$3.40</span><span class="old-price">$3.75</span></div>', 
+        description: "Breadsticks with pate and shredded pork floss",
+        imageSrc: "img/pro-48.webp",
+        imageAlt: "Matcha Combo"
+    },
+    { 
+        name: "SALT FOAM MATCHA LATTE + Breadsticks", 
+        price: '<div class="price-with-discount"><span class="gold-accent font-bold text-xl">$3.50</span><span class="old-price">$4.00</span></div>', 
+        description: "Breadsticks with pate and shredded pork floss",
+        imageSrc: "img/pro-49.webp",
+        imageAlt: "Matcha Combo"
+    },
+    { 
+        name: "EGG CREAM MATCHA LATTE + Breadsticks", 
+        price: '<div class="price-with-discount"><span class="gold-accent font-bold text-xl">$3.50</span><span class="old-price">$4.00</span></div>', 
+        description: "Breadsticks with pate and shredded pork floss",
+        imageSrc: "img/pro-50.webp",
+        imageAlt: "Matcha Combo"
+    },
+    { 
+        name: "MANGO MATCHA LATTE + Breadsticks", 
+        price: '<div class="price-with-discount"><span class="gold-accent font-bold text-xl">$3.50</span><span class="old-price">$4.00</span></div>', 
+        description: "Breadsticks with pate and shredded pork floss",
+        imageSrc: "img/pro-51.webp",
+        imageAlt: "Matcha Combo"
+    }
+],
+"Breadsticks": [
+    { 
+        name: "Breadstick (single)", 
+        price: '<div class="price-with-discount"><span class="gold-accent font-bold text-xl">$1.27</span><span class="old-price">$1.50</span></div>', 
+        description: "Breadsticks with pate and shredded pork floss",
+        imageSrc: "img/pro-52.webp",
+        imageAlt: "Breadstick"
+    }
+]
         };
 
         // DOM elements
