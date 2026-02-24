@@ -1,0 +1,335 @@
+/* Base styles */
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #fcfbf9;
+  color: #1e293b;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+
+/* Chart Container Styling */
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  height: 300px;
+  max-height: 300px;
+}
+
+/* Flashcard Flip Styles */
+.flashcard-container {
+  perspective: 1000px;
+  width: 100%;
+  max-width: 400px;
+  height: 250px;
+  margin: 0 auto;
+}
+
+.flashcard {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  cursor: pointer;
+}
+
+.flashcard.flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.flashcard-front {
+  background: white;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.flashcard-back {
+  background: #4f46e5;
+  color: white;
+  transform: rotateY(180deg);
+  text-align: center;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+/* Flashcard back content styling */
+.flashcard-back .definition {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.flashcard-back .example {
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 1rem;
+  width: 100%;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Responsive adjustments for flashcards */
+@media (max-width: 640px) {
+  .flashcard-container {
+    height: 200px;
+    max-width: 90%;
+  }
+  
+  .flashcard-back .definition {
+    font-size: 1rem;
+  }
+  
+  .flashcard-back .example {
+    font-size: 0.8rem;
+  }
+}
+
+/* Navigation styles */
+.nav-btn {
+  cursor: pointer;
+  user-select: none;
+}
+
+.nav-btn.active {
+  color: #4f46e5 !important;
+  background-color: #eef2ff !important;
+}
+
+/* Card counter */
+.card-counter {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  color: #64748b;
+}
+
+/* Mobile bottom navigation */
+.mobile-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-nav {
+    display: flex;
+  }
+  
+  .desktop-nav {
+    display: none;
+  }
+  
+  .flashcard-container {
+    height: 220px;
+  }
+}
+
+/* Idiom wall card styles */
+.idiom-card {
+  transition: all 0.3s ease;
+}
+
+.idiom-card:hover .idiom-definition {
+  opacity: 1;
+}
+
+.idiom-card:focus-visible {
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
+}
+
+.idiom-definition {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.idiom-card.revealed .idiom-definition,
+.idiom-card.revealed .idiom-example {
+  opacity: 1;
+}
+
+/* Quiz styles */
+.quiz-option {
+  transition: all 0.2s ease;
+}
+
+.quiz-option:hover {
+  background-color: #eef2ff;
+  border-color: #c7d2fe;
+}
+
+/* Animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.max-w-7xl {
+  max-width: 80rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-slate-900 {
+  color: #0f172a;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-slate-100 {
+  border-color: #e2e8f0;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-slate-800 {
+  color: #1e293b;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.text-slate-600 {
+  color: #475569;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+/* Responsive grid adjustments */
+@media (min-width: 640px) {
+  .grid-cols-1-sm {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-cols-2-md {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-cols-3-lg {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

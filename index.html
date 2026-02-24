@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1785,3 +1786,404 @@ function renderMenuItems(category) {
     </script>
 </body>
 </html>
+=======
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Vocabulary & Idioms Explorer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./styles/responsive.css" />
+
+    <!-- Chosen Palette: Scholarly Serenity -->
+    <!-- Colors:
+       Background: #fcfbf9 (Warm Paper)
+       Primary Text: #1e293b (Slate 800)
+       Accent: #4f46e5 (Indigo 600)
+       Secondary: #f1f5f9 (Slate 100)
+       Success: #10b981 (Emerald 500)
+  -->
+
+    <!-- Application Structure Plan:
+       1. Dashboard Header: Introduction and high-level stats (Chart.js) showing the composition of the study guide (Vocab vs Idioms vs Sounds).
+       2. Navigation Tabs: To switch between "Flashcard Study Mode", "Idiom Wall", "Sound Studio", and "Quiz Mode".
+       3. Dynamic Content Area:
+          - Flashcard Mode: Single card focus with flip animation and "Mark as Learned" logic.
+          - Idiom Wall: Masonry-style grid for exploring phrases.
+          - Sound Studio: List view with detailed definitions.
+          - Quiz Mode: Interactive multiple-choice generator based on the data.
+       4. Interaction: Users can "mark" words as learned, which dynamically updates the Mastery Chart.
+  -->
+
+    <!-- Visualization & Content Choices:
+       - Curriculum Composition (Doughnut Chart): Goal -> Inform. Shows the ratio of material types. Library: Chart.js.
+       - Mastery Progress (Bar Chart): Goal -> Change/Monitor. Updates as users interact with flashcards. Library: Chart.js.
+       - Interactive Cards: Goal -> Memorize. HTML/CSS Flip effects.
+       - Quiz Interface: Goal -> Validate. JS logic validation.
+       - JUSTIFICATION: The visual feedback of the charts encourages progress, while the distinct modes cater to different learning styles (visual, testing, reading).
+  -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Navigation / Header -->
+    <header
+      class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <span class="text-2xl font-bold text-indigo-600 tracking-tight">
+              English<span class="text-slate-800"> Advanced</span>
+            </span>
+          </div>
+          <nav class="hidden md:flex space-x-8 desktop-nav">
+            <button
+              class="nav-btn text-slate-900 font-medium hover:text-indigo-600 px-3 py-2 rounded-md transition"
+              id="btn-dashboard"
+            >
+              Dashboard
+            </button>
+            <button
+              class="nav-btn text-slate-500 font-medium hover:text-indigo-600 px-3 py-2 rounded-md transition"
+              id="btn-flashcards"
+            >
+              Flashcards
+            </button>
+            <button
+              class="nav-btn text-slate-500 font-medium hover:text-indigo-600 px-3 py-2 rounded-md transition"
+              id="btn-idioms"
+            >
+              Idioms Wall
+            </button>
+            <button
+              class="nav-btn text-slate-500 font-medium hover:text-indigo-600 px-3 py-2 rounded-md transition"
+              id="btn-quiz"
+            >
+              Quiz Mode
+            </button>
+          </nav>
+          <button
+            id="mobile-menu-toggle"
+            type="button"
+            class="md:hidden text-slate-500 hover:text-indigo-600 p-2 rounded-md"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open menu</span>
+            <span class="text-2xl leading-none">☰</span>
+          </button>
+        </div>
+      </div>
+      <div id="mobile-menu" class="md:hidden hidden border-t border-slate-200 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+          <div class="flex flex-col gap-1">
+            <button
+              class="mobile-nav-btn nav-btn text-left text-slate-900 font-medium hover:text-indigo-600 hover:bg-slate-50 px-3 py-2 rounded-md transition"
+              data-view="dashboard"
+              type="button"
+            >
+              Dashboard
+            </button>
+            <button
+              class="mobile-nav-btn nav-btn text-left text-slate-500 font-medium hover:text-indigo-600 hover:bg-slate-50 px-3 py-2 rounded-md transition"
+              data-view="flashcards"
+              type="button"
+            >
+              Flashcards
+            </button>
+            <button
+              class="mobile-nav-btn nav-btn text-left text-slate-500 font-medium hover:text-indigo-600 hover:bg-slate-50 px-3 py-2 rounded-md transition"
+              data-view="idioms"
+              type="button"
+            >
+              Idioms Wall
+            </button>
+            <button
+              class="mobile-nav-btn nav-btn text-left text-slate-500 font-medium hover:text-indigo-600 hover:bg-slate-50 px-3 py-2 rounded-md transition"
+              data-view="quiz"
+              type="button"
+            >
+              Quiz Mode
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow bg-slate-50">
+      <!-- VIEW: DASHBOARD -->
+      <section
+        id="view-dashboard"
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in"
+      >
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold text-slate-900">Study Overview</h1>
+          <p class="mt-2 text-slate-600">
+            Welcome to your interactive study guide. Explore vocabulary, master
+            idioms, and test your knowledge. Use the navigation to begin.
+          </p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <!-- Stat Card 1 -->
+          <div
+            class="bg-white p-6 rounded-xl shadow-sm border border-slate-100"
+          >
+            <h3 class="text-sm font-medium text-slate-500">Total Items</h3>
+            <p class="mt-2 text-4xl font-bold text-slate-900" id="total-count">
+              0
+            </p>
+            <div class="mt-4 text-xs text-slate-400">
+              Vocabulary, Idioms & Sounds
+            </div>
+          </div>
+          <!-- Stat Card 2 -->
+          <div
+            class="bg-white p-6 rounded-xl shadow-sm border border-slate-100"
+          >
+            <h3 class="text-sm font-medium text-slate-500">Items Mastered</h3>
+            <p
+              class="mt-2 text-4xl font-bold text-emerald-600"
+              id="mastered-count"
+            >
+              0
+            </p>
+            <p class="mt-2 text-xs text-slate-500">
+              Keep practicing to increase this score.
+            </p>
+          </div>
+          <!-- Stat Card 3 -->
+          <div
+            class="bg-white p-6 rounded-xl shadow-sm border border-slate-100"
+          >
+            <h3 class="text-sm font-medium text-slate-500">Current Streak</h3>
+            <p
+              class="mt-2 text-4xl font-bold text-indigo-600"
+              id="streak-count"
+            >
+              1
+            </p>
+            <p class="mt-2 text-xs text-slate-500">Day(s) active</p>
+          </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Curriculum Distribution -->
+          <div
+            class="bg-white p-6 rounded-xl shadow-sm border border-slate-100"
+          >
+            <h3 class="text-lg font-bold text-slate-800 mb-4">
+              Curriculum Composition
+            </h3>
+            <div class="chart-container">
+              <canvas id="compositionChart"></canvas>
+            </div>
+            <p class="mt-4 text-sm text-slate-500 text-center">
+              Breakdown of terms by category.
+            </p>
+          </div>
+
+          <!-- Mastery Progress -->
+          <div
+            class="bg-white p-6 rounded-xl shadow-sm border border-slate-100"
+          >
+            <h3 class="text-lg font-bold text-slate-800 mb-4">
+              Learning Progress
+            </h3>
+            <div class="chart-container">
+              <canvas id="progressChart"></canvas>
+            </div>
+            <p class="mt-4 text-sm text-slate-500 text-center">
+              Track your mastery of the material.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: FLASHCARDS -->
+      <section id="view-flashcards" class="hidden max-w-4xl mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl font-bold text-slate-900">
+            Flashcard Study Mode
+          </h2>
+          <p class="text-slate-600">
+            Click the card to reveal the definition and example. Mark as
+            "Mastered" to track progress.
+          </p>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex justify-center space-x-4 mb-6">
+          <select
+            id="flashcard-category"
+            class="bg-white border border-slate-300 text-slate-700 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            <option value="all">All Categories</option>
+            <option value="vocabulary">Vocabulary</option>
+            <option value="phrasal_verbs">Phrasal Verbs</option>
+            <option value="idioms_slang">Idioms and Slang</option>
+            <option value="others">Others</option>
+          </select>
+        </div>
+
+        <!-- The Card -->
+        <div class="flashcard-container">
+          <div id="flashcard-inner" class="flashcard">
+            <!-- Front -->
+            <div class="flashcard-face flashcard-front">
+              <span
+                class="text-xs font-bold text-indigo-500 uppercase tracking-wider mb-2"
+                id="card-category"
+                >Category</span
+              >
+              <h3 class="text-3xl font-bold text-slate-800" id="card-front">
+                Word
+              </h3>
+              <p class="text-slate-400 text-sm mt-4">(Click to flip)</p>
+            </div>
+            <!-- Back -->
+            <div class="flashcard-face flashcard-back">
+              <h3 class="text-xl font-medium leading-relaxed" id="card-back">
+                Definition
+              </h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="flex flex-col sm:flex-row justify-center items-center mt-8 gap-4 sm:gap-6">
+          <button
+            id="prev-card-btn"
+            class="bg-white text-slate-700 hover:bg-slate-100 border border-slate-300 px-6 py-2 rounded-full font-medium transition"
+          >
+            Previous
+          </button>
+          <div class="text-slate-500 font-mono card-counter" id="card-counter">
+            1 / 100
+          </div>
+          <button
+            id="next-card-btn"
+            class="bg-white text-slate-700 hover:bg-slate-100 border border-slate-300 px-6 py-2 rounded-full font-medium transition"
+          >
+            Next
+          </button>
+        </div>
+
+        <div class="flex justify-center mt-6">
+          <button
+            id="mark-mastered-btn"
+            class="bg-emerald-100 text-emerald-700 hover:bg-emerald-200 px-6 py-2 rounded-full font-medium transition flex items-center"
+          >
+            <span>✓ Mark as Mastered</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- VIEW: IDIOMS WALL -->
+      <section id="view-idioms" class="hidden max-w-7xl mx-auto px-4 py-8">
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-slate-900">The Idiom Wall</h2>
+          <p class="text-slate-600">
+            Explore expressions and phrases. Hover or click to reveal the
+            meaning.
+          </p>
+          <input
+            type="text"
+            id="idiom-search"
+            placeholder="Search idioms..."
+            class="mt-4 w-full md:w-1/3 bg-white border border-slate-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <div
+          id="idioms-grid"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          <!-- Generated by JS -->
+        </div>
+      </section>
+
+      <!-- VIEW: QUIZ MODE -->
+      <section id="view-quiz" class="hidden max-w-3xl mx-auto px-4 py-8">
+        <div
+          class="bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-200"
+        >
+          <div class="bg-indigo-600 px-6 py-4">
+            <h2 class="text-white text-xl font-bold">Quick Fire Quiz</h2>
+            <p class="text-indigo-200 text-sm">Test your retention.</p>
+          </div>
+
+          <div class="p-8" id="quiz-container">
+            <div class="flex justify-between text-sm text-slate-500 mb-4">
+              <span id="quiz-progress">Question 1</span>
+              <span id="quiz-score">Score: 0</span>
+            </div>
+
+            <h3
+              class="text-xl font-bold text-slate-800 mb-6"
+              id="quiz-question"
+            >
+              Question text here?
+            </h3>
+
+            <div class="space-y-3" id="quiz-options">
+              <!-- Options generated by JS -->
+            </div>
+
+            <div
+              id="quiz-feedback"
+              class="mt-6 hidden p-4 rounded-lg bg-slate-100 text-slate-700"
+            >
+              Feedback message.
+            </div>
+
+            <button
+              id="next-question-btn"
+              class="hidden mt-6 w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition font-medium"
+            >
+              Next Question
+            </button>
+          </div>
+
+          <!-- Quiz Result State -->
+          <div class="p-8 hidden text-center" id="quiz-results">
+            <div class="text-6xl mb-4">🏆</div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-2">
+              Quiz Complete!
+            </h3>
+            <p class="text-slate-600 mb-6">
+              You scored
+              <span id="final-score" class="font-bold text-indigo-600">0</span>.
+            </p>
+            <button
+              id="try-again-btn"
+              class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition"
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-8 mt-auto">
+      <div class="max-w-7xl mx-auto px-4 text-center text-slate-400 text-sm">
+        <p>&copy; 2026 English Advanced. Interactive Study Guide.</p>
+      </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
+>>>>>>> 6f8bf47 (update Last project)
